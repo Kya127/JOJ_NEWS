@@ -1,0 +1,9 @@
+{% extends 'base.html'%}
+{%block content%}
+   <h1>Affichage de la liste des articles</h1>
+   {% if liste_article%}
+    {%for a in liste_article%}
+     <p>{{a.titre}}</p>
+    {%endfor%}
+   {%endif%}
+{%endblock%}
