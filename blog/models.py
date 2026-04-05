@@ -18,10 +18,21 @@ class Article(models.Model):
     def __str__(self):
         return self.titre
     
+    
 class Commentaire(models.Model):
-    article_commentaire=models.ForeignKey(Article,on_delete=models.CASCADE,related_name='commentaires_article')
-    auteur_commentaire=models.ForeignKey(User,on_delete=models.CASCADE)
-    texte_commentaire=models.TextField()
-    date_commentaire=models.DateTimeField(auto_now_add=True)
+    article = models.ForeignKey(
+        Article,
+        on_delete=models.CASCADE,
+        related_name="commentaires",
+    )
+    auteur = models.ForeignKey(User, on_delete=models.CASCADE)
+    contenu = models.TextField()
+    date_creation = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["date_creation"]
+        verbose_name = "Commentaire"
+        verbose_name_plural = "Commentaires"
+
     def __str__(self):
-        return f"{self.auteur_commentaire.username} - {self.article.titre}"
+        return f"Commentaire de {self.auteur} sur {self.article}"

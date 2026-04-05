@@ -4,13 +4,14 @@ from .models import Commentaire
 class FormulaireCommentaire(forms.ModelForm):
    class Meta:
        model = Commentaire
-       fields = ['texte_commentaire']
+       fields = ['contenu']
        widgets = {
-           
-           'texte_commentaire' : forms.Textarea(attrs={
-               'class': 'form-control' ,
-               'placholder' : 'Mettre ici votre commentaire'
-               
-           })
-       }
+            "contenu": forms.Textarea(
+                attrs={
+                    "class": "form-control",
+                    "rows": 4,
+                    "placeholder": "Écrivez votre message…",
+                }
+            ),
+        }
       
