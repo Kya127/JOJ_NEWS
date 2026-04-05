@@ -1,24 +1,26 @@
 {% extends "base.html" %}
-{% block title %}Articles – JOJ{% endblock %}
+{% block title %}Article JOJ{% endblock %}
 {% block content %}
+
 <div class="row mb-4">
   <div class="col">
     <h1 class="h2 fw-bold text-dakar-primary">Récits des compétitions</h1>
-    <p class="text-muted mb-0">Actualités publiées par l’organisation.</p>
+    <p class="text-muted mb-0">Actualités publiées par l' organisation.</p>
   </div>
 
-  {% comment %} {% if user.is_authenticated %}
+  <!-- {% comment %} {% if user.is_authenticated %}
   <div class="col-auto">
     <a href="{% url 'articles:creer' %}" class="btn btn-dakar">
       Ajouter un article
     </a>
   </div>
-  {% endif %} {% endcomment %}
+  {% endif %} {% endcomment %} -->
 
 </div>
 
 {% if liste_article %}
 <div class="row row-cols-1 row-cols-md-2 g-4">
+
   {% for article in liste_article %}
   <div class="col">
     <div class="card h-100 shadow-sm border-0">
@@ -37,8 +39,10 @@
     </div>
   </div>
   {% endfor %}
+
 </div>
 {% else %}
+
 <div class="alert alert-info">Aucun article pour le moment. Les organisateurs peuvent en ajouter depuis
   l'administration.</div>
 {% endif %}

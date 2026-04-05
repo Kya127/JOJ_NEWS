@@ -44,7 +44,7 @@ class Commentaire(models.Model):
         return f"Commentaire de {self.auteur} sur {self.article}"
     
 
-
+# Signal pour notifier l'admin lors de la création d'un commentaire
 @receiver(post_save, sender=Commentaire)
 def notifier_nouveau_commentaire(sender, instance, created, **kwargs):
     if created:
