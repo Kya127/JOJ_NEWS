@@ -1,17 +1,23 @@
 {% extends "base.html" %}
+{% load static %}
+
 {% block title %}Accueil – JOJ{% endblock %}
 {% block content %}
 
-<div class="row justify-content-center">
-  <div class="col-lg-8 text-center">
-    <h1 class="display-6 fw-bold mb-3">Plateforme officielle JOJ</h1>
-    <p class="lead text-muted mb-4">
-      Suivez les récits des compétitions et échangez via les commentaires sur chaque article.
-    </p>
-    <a class="btn btn-joj btn-lg" href="{% url 'articles:liste_des_articles' %}">Voir les articles</a>
-    {% if not user.is_authenticated %}
-    <p class="small text-muted mt-3">Connectez-vous pour commenter.</p>
-    {% endif %}
+<!-- Bannière principale -->
+<div class="hero-banner mb-5">
+  <img src="{% static 'img/banner.jpg' %}" alt="Dakar 2026 - Jeux Olympiques de la Jeunesse" class="img-fluid w-100">
+  <div class="hero-overlay">
+    <div class="container text-center text-white">
+      <h1 class="display-4 fw-bold mb-3">Plateforme officielle JOJ</h1>
+      <p class="lead mb-4">
+        Suivez les récits des compétitions et échangez via les commentaires sur chaque article.
+      </p>
+      <a class="btn btn-dakar btn-lg" href="{% url 'articles:liste_des_articles' %}">Voir les articles</a>
+      {% if not user.is_authenticated %}
+      <p class="small mt-3">Connectez-vous pour commenter.</p>
+      {% endif %}
+    </div>
   </div>
 </div>
 

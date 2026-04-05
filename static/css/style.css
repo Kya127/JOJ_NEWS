@@ -1,0 +1,176 @@
+  :root {
+      --dakar-blue: #00A3E0;
+      --dakar-yellow: #FFD100;
+      --dakar-green: #00A651;
+      --dakar-white: #FFFFFF;
+      --dakar-black: #1A1A1A;
+      --dakar-light-blue: #E6F7FF;
+  }
+
+  body {
+      font-family: system-ui, sans-serif;
+      color: var(--dakar-black);
+  }
+
+  .navbar-dakar {
+      background: linear-gradient(90deg, var(--dakar-blue) 0%, #0088CC 100%);
+  }
+
+  .navbar-dakar .navbar-brand {
+      font-weight: 700;
+      letter-spacing: .02em;
+      color: var(--dakar-white);
+  }
+
+  .btn-dakar {
+      background-color: var(--dakar-blue);
+      border-color: var(--dakar-blue);
+      color: var(--dakar-white);
+  }
+
+  .btn-dakar:hover {
+      background-color: #0088CC;
+      border-color: #0088CC;
+      color: var(--dakar-white);
+  }
+
+  .btn-dakar-secondary {
+      background-color: var(--dakar-green);
+      border-color: var(--dakar-green);
+      color: var(--dakar-white);
+  }
+
+  .btn-dakar-secondary:hover {
+      background-color: #008540;
+      border-color: #008540;
+      color: var(--dakar-white);
+  }
+
+  .footer-dakar {
+      border-top: 4px solid var(--dakar-blue);
+      background: #f8f9fa;
+  }
+
+  .accent-bar {
+      height: 4px;
+      background: linear-gradient(90deg, var(--dakar-blue), var(--dakar-green), var(--dakar-black));
+  }
+
+  .badge-dakar {
+      background-color: var(--dakar-green);
+      color: var(--dakar-white);
+  }
+
+  .text-dakar-primary {
+      color: var(--dakar-blue);
+  }
+
+  .bg-dakar-primary {
+      background-color: var(--dakar-blue);
+  }
+
+  .border-dakar {
+      border-color: var(--dakar-blue);
+  }
+
+  /* Logo et styles additionnels pour JOJ */
+  .logo-dakar {
+      height: 50px;
+      width: auto;
+      object-fit: contain;
+  }
+
+  .navbar-dakar {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+  }
+
+  .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+  }
+
+  .navbar-brand img {
+      transition: transform 0.3s ease;
+  }
+
+  .navbar-brand:hover img {
+      transform: scale(1.05);
+  }
+
+  /* Styles pour la bannière hero */
+  .hero-banner {
+      position: relative;
+      height: 80vh;
+      min-height: 500px;
+      overflow: hidden;
+  }
+
+  .hero-banner img {
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+  }
+
+  .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  /* Styles pour la page de détail */
+  .article-detail {
+      background: #f8f9fa;
+      padding: 2rem 0;
+  }
+
+  .article-detail .card {
+      border: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      background: white;
+  }
+
+  .article-detail .card-body {
+      background: white;
+      border-radius: 0.5rem;
+  }
+
+  .article-body {
+      background: #ffffff;
+      padding: 1.5rem;
+      border-radius: 0.375rem;
+      border: 1px solid #e9ecef;
+      line-height: 1.8;
+      font-size: 1.1rem;
+      color: var(--dakar-black);
+  }
+
+  .commentaire-section {
+      background: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .commentaire-item {
+      background: #f8f9fa;
+      border-left: 4px solid var(--dakar-blue);
+      margin-bottom: 0.5rem;
+  }
+
+  .commentaire-item:hover {
+      background: #e9ecef;
+  }
+
+  .breadcrumb {
+      background: white;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
