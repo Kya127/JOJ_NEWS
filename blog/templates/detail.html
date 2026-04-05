@@ -1,23 +1,79 @@
-{%extends 'base.html'%}
-{%block content%}
- 
-    <h2>{{ article.titre }}</h2>
-    <p>{{ article.contenu }}</p>
-    <p>{{ article.date_publication }}</p>
-    <p>{{ article.categorie }}</p>
-    <h4>Formulaire pour ajouter un commentaire</h4>
-    <form action="" method="post">
-        {%csrf_token%}
-        {{form.as_p}}
-        <button type="submit">Publier</button>
-    </form>
-    <h4>Commentaires: </h4>
-    {%for c in Commentaires%}
-      <p>{{c.auteur_commentaire.username}}</p>
-      <p>{{c.date_commentaire}}</p>
-    {%empty%}
-      <p>Aucun commentaire pour l'instant!</p>
-    {%endfor%}
-  
-    <a href="{% url 'detail' id=article.id %}">Retour à l'article</a>
-   {%endblock%}
+{% extends "base.html" %}
+{% block title %}{{ article.titre }} – JOJ{% endblock %}
+{% block content %}
+<nav aria-label="fil d’Ariane" class="mb-3">
+  <ol class="breadcrumb small mb-0">
+    <li class="breadcrumb-item"><a href="{% url 'articles:liste_des_articles' %}">Articles</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ article.titre|truncatewords:5 }}</li>
+  </ol>
+</nav>
+
+<article class="card border-0 shadow-sm mb-4">
+  <div class="card-body p-4 p-md-5">
+    <span class="badge badge-dakar mb-2">{{ article.categories.nom }}</span>
+    <h1 class="h2 fw-bold mb-3 text-dakar-primary">{{ article.titre }}</h1>
+    <p class="text-muted small mb-4">
+      Publié le {{ article.date_publication|date:"d/m/Y à H:i" }} · {{ article.auteur.username }}
+    </p>
+    <div class="article-body lh-lg">
+      {{ article.contenu|linebreaks }}
+    </div>
+  </div>
+</article>
+
+<section class="mb-4" id="commentaires">
+  <h2 class="h4 fw-bold mb-3">Commentaires</h2>
+
+  {% if user.is_authenticated %}
+  <div class="card border-0 shadow-sm mb-4">
+    <div class="card-body">
+      <h3 class="h6 text-muted mb-3">Ajouter un commentaire</h3>
+
+      <form method="post" action="">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        <div class="mb-3">
+          <label class="form-label" for="{{ form.contenu.id_for_label }}">{{ form.contenu.label }}</label>
+          {{ form.contenu }}
+          {{ form.contenu.errors }}
+        </div>
+
+        <button type="submit" class="btn btn-dakar">Publier</button>
+
+      </form>
+    </div>
+  </div>
+
+  {% else %}
+  <div class="alert alert-light border mb-4">
+    <a href="{% url 'login' %}?next={{ request.path }}">Connectez-vous</a> pour laisser un commentaire.
+  </div>
+  {% endif %}
+
+  {% if commentaires %}
+  <ul class="list-group list-group-flush shadow-sm rounded overflow-hidden">
+    {% for c in commentaires %}
+    <li class="list-group-item py-3">
+      <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+        <strong class="text-dakar-primary">{{ c.auteur.username }}</strong>
+        <span class="small text-muted">{{ c.date_creation|date:"d/m/Y H:i" }}</span>
+      </div>
+      <p class="mb-0 mt-2">{{ c.contenu|linebreaksbr }}</p>
+      {% if user.is_authenticated and c.auteur == user %}
+      <div class="mt-2 d-flex gap-2">
+        <a href="{% url 'articles:modifier_commentaire' c.id %}" class="btn btn-sm btn-dakar-secondary">Modifier</a>
+        <a href="{% url 'articles:supprimer_commentaire' c.id %}" class="btn btn-sm btn-dakar">Supprimer</a>
+      </div>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="text-muted small">Aucun commentaire pour cet article.</p>
+  {% endif %}
+</section>
+{% endblock %}

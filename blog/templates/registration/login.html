@@ -1,15 +1,77 @@
 {% extends 'base.html' %}
+{% block title %}Connexion - JOJ{% endblock %}
 {% block content %}
 
-<form action="" method="post">
-    {% csrf_token %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-dakar-primary text-white text-center py-3">
+                <h4 class="mb-0">
+                    <i class="bi bi-person-circle me-2"></i>
+                    Connexion
+                </h4>
+            </div>
+            <div class="card-body p-4">
+                <form action="" method="post">
+                    {% csrf_token %}
 
-    {{ form.as_p }}
-     
-    <button type="submit">Se connecter</button>
-</form>
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for error in form.non_field_errors %}
+                        {{ error }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
 
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label">
+                            <i class="bi bi-person me-1"></i>
+                            Nom d'utilisateur
+                        </label>
+                        <input type="text" name="username" class="form-control" id="id_username" required>
+                        {% if form.username.errors %}
+                        <div class="text-danger small mt-1">
+                            {% for error in form.username.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
 
+                    <div class="mb-3">
+                        <label for="id_password" class="form-label">
+                            <i class="bi bi-lock me-1"></i>
+                            Mot de passe
+                        </label>
+                        <input type="password" name="password" class="form-control" id="id_password" required>
+                        {% if form.password.errors %}
+                        <div class="text-danger small mt-1">
+                            {% for error in form.password.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
 
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-dakar btn-lg">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>
+                            Se connecter
+                        </button>
+                    </div>
+                </form>
 
-{% endblock  %}
+                <div class="text-center mt-3">
+                    <small class="text-muted">
+                        Pas encore de compte ?
+                        <a href="{% url 'articles:inscrire' %}" class="text-dakar-primary text-decoration-none">
+                            S'inscrire ici
+                        </a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

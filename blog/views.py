@@ -14,7 +14,7 @@ def Accueil(request):
 
 class Inscription(CreateView):
     form_class = UserCreationForm
-    success_url = reverse_lazy('accueil')
+    success_url = reverse_lazy('articles:accueil')
     template_name = 'registration/signup.html'
 
 def ListView(request):
@@ -28,25 +28,25 @@ def ListView(request):
 def DetailView(request,id):
     
      
-     un_article=get_object_or_404(Article,id=id)
-     commentaires = un_article.commentaires_article.all()
-     if request.method  =='POST':
+    un_article=get_object_or_404(Article,id=id)
+    commentaires = un_article.commentaires.all()
+    if request.method  =='POST':
         form = FormulaireCommentaire(request.POST) 
         if form.is_valid():
             commentaire = form.save(commit=False)
-            commentaire.auteur_commentaire = request.user
-            commentaire.article_commentaire = un_article
+            commentaire.auteur = request.user
+            commentaire.article = un_article
             commentaire.save()
-            return  redirect('detail',id=un_article.id)
-     else:
+            return  redirect('articles:detail',id=un_article.id)
+    else:
          form = FormulaireCommentaire() 
-     affichage={
+    affichage={
              'article': un_article,
              'commentaires': commentaires,
              'form': form
          }
          
-     return render(request,'detail.html',affichage)
+    return render(request,'detail.html',affichage)
 
 
 @login_required
