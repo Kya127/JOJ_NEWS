@@ -16,13 +16,14 @@
             {% if user.is_authenticated  %}
                 <form action="{% url 'logout' %}" method="post">
                     {% csrf_token %}
-                    <button  class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Deconnexion</button>
+                    <button  class="navbar-toggler" type="submit" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Deconnexion</button>
                 </form>
                 
             {% else %}
                
                 <a href=" {% url 'login' %}">Connexion</a>
                 <a  href=" {% url 'inscrire' %}">Inscription</a>
+                
                
             {% endif %}
           
