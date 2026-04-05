@@ -1,37 +1,142 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-    <title>Document</title>
-</head>
-<body>
+<html lang="fr">
 
-    <header>
-        
-           <a href="">Accueil</a>
-          
-            {% if user.is_authenticated  %}
-                <form action="{% url 'logout' %}" method="post">
-                    {% csrf_token %}
-                    <button  class="navbar-toggler" type="submit" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Deconnexion</button>
-                </form>
-                
-            {% else %}
-               
-                <a href=" {% url 'login' %}">Connexion</a>
-                <a  href=" {% url 'inscrire' %}">Inscription</a>
-                
-               
-            {% endif %}
-          
-        </nav>
-    </header>
-   
-    {% block content %}
-    {% endblock  %}
-    
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}JOJ – Plateforme officielle{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --dakar-red: #E31837;
+      --dakar-white: #FFFFFF;
+      --dakar-green: #006747;
+      --dakar-yellow: #FFD100;
+      --dakar-brown: #8B4513;
+      --dakar-black: #000000;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      color: var(--dakar-black);
+    }
+
+    .navbar-dakar {
+      background: linear-gradient(90deg, var(--dakar-red) 0%, #C41230 100%);
+    }
+
+    .navbar-dakar .navbar-brand {
+      font-weight: 700;
+      letter-spacing: .02em;
+      color: var(--dakar-white);
+    }
+
+    .btn-dakar {
+      background-color: var(--dakar-red);
+      border-color: var(--dakar-red);
+      color: var(--dakar-white);
+    }
+
+    .btn-dakar:hover {
+      background-color: #C41230;
+      border-color: #C41230;
+      color: var(--dakar-white);
+    }
+
+    .btn-dakar-secondary {
+      background-color: var(--dakar-green);
+      border-color: var(--dakar-green);
+      color: var(--dakar-white);
+    }
+
+    .btn-dakar-secondary:hover {
+      background-color: #005238;
+      border-color: #005238;
+      color: var(--dakar-white);
+    }
+
+    .footer-dakar {
+      border-top: 4px solid var(--dakar-yellow);
+      background: #f8f9fa;
+    }
+
+    .accent-bar {
+      height: 4px;
+      background: linear-gradient(90deg, var(--dakar-red), var(--dakar-yellow), var(--dakar-green), var(--dakar-black), var(--dakar-brown));
+    }
+
+    .badge-dakar {
+      background-color: var(--dakar-green);
+      color: var(--dakar-white);
+    }
+
+    .text-dakar-primary {
+      color: var(--dakar-red);
+    }
+
+    .bg-dakar-primary {
+      background-color: var(--dakar-red);
+    }
+
+    .border-dakar {
+      border-color: var(--dakar-red);
+    }
+  </style>
+  {% block extra_css %}{% endblock %}
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <div class="accent-bar"></div>
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-dakar mb-4">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'articles:accueil' %}">JOJ</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMain">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="{% url 'articles:accueil' %}">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'articles:list' %}">Articles</a></li>
+          {% if user.is_authenticated %}
+          <li class="nav-item"><span class="nav-link disabled text-white-50">{{ user.username }}</span></li>
+          <li class="nav-item">
+            <form action="{% url 'logout' %}" method="post" class="d-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-dakar btn-sm">Déconnexion</button>
+            </form>
+          </li>
+          {% else %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Connexion</a></li>
+          <li class="nav-item"><a class="btn btn-dakar-secondary btn-sm ms-lg-2"
+              href="{% url 'accounts:signup' %}">Inscription</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container flex-grow-1 pb-5">
+    {% if messages %}
+    {% for message in messages %}
+    {% with tag=message.tags|default:'info' %}
+    <div class="alert alert-{% if tag == 'error' %}danger{% else %}{{ tag }}{% endif %} alert-dismissible fade show"
+      role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% endwith %}
+    {% endfor %}
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer-dakar py-4 mt-auto">
+    <div class="container text-center text-muted small">
+      Plateforme de communication – Jeux Olympiques de la Jeunesse
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  {% block extra_js %}{% endblock %}
 </body>
+
 </html>

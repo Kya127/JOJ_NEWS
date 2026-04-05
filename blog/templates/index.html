@@ -1,8 +1,18 @@
-{% extends 'base.html' %}
-
+{% extends "base.html" %}
+{% block title %}Accueil – JOJ{% endblock %}
 {% block content %}
 
-<h1>Bienvenue dans la page d'accueil !</h1>
+<div class="row justify-content-center">
+  <div class="col-lg-8 text-center">
+    <h1 class="display-6 fw-bold mb-3">Plateforme officielle JOJ</h1>
+    <p class="lead text-muted mb-4">
+      Suivez les récits des compétitions et échangez via les commentaires sur chaque article.
+    </p>
+    <a class="btn btn-joj btn-lg" href="{% url 'articles:list' %}">Voir les articles</a>
+    {% if not user.is_authenticated %}
+    <p class="small text-muted mt-3">Connectez-vous pour commenter.</p>
+    {% endif %}
+  </div>
+</div>
 
-
-{% endblock  %}
+{% endblock %}

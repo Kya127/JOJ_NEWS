@@ -1,6 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+# Signal pour notifier l'admin lors de la création d'un commentaire
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.core.mail import send_mail
+from django.conf import settings
+
 # Create your models here.
 class Categorie(models.Model):
     nom = models.CharField(max_length=100)
@@ -36,3 +42,23 @@ class Commentaire(models.Model):
 
     def __str__(self):
         return f"Commentaire de {self.auteur} sur {self.article}"
+    
+
+
+@receiver(post_save, sender=Commentaire)
+def notifier_nouveau_commentaire(sender, instance, created, **kwargs):
+    if created:
+        sujet = f"Nouveau commentaire sur : {instance.article.titre}"
+        message = f"Un nouveau commentaire a été ajouté par {instance.auteur.username} sur l'article '{instance.article.titre}'.\n\n"
+        message += f"Contenu du commentaire :\n{instance.contenu}\n\n"
+        message += f"Lien vers l'article : /articles/{instance.article.id}/"
+        
+        # Envoyer l'email à l'admin configuré
+        admin_email = "fassane348@gmail.com"
+        send_mail(
+            sujet,
+            message,
+            settings.DEFAULT_FROM_EMAIL,
+            [admin_email],
+            fail_silently=False,
+        )
