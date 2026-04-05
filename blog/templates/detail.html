@@ -1,10 +1,23 @@
 {%extends 'base.html'%}
 {%block content%}
  
-    <h2>{{ un_article.titre }}</h2>
-    <p>{{ un_article.contenu }}</p>
-    <p>{{ un_article.date_publication }}</p>
-    <p>{{ un_article.categorie }}</p>
+    <h2>{{ article.titre }}</h2>
+    <p>{{ article.contenu }}</p>
+    <p>{{ article.date_publication }}</p>
+    <p>{{ article.categorie }}</p>
+    <h4>Formulaire pour ajouter un commentaire</h4>
+    <form action="" method="post">
+        {%csrf_token%}
+        {{form.as_p}}
+        <button type="submit">Publier</button>
+    </form>
+    <h4>Commentaires: </h4>
+    {%for c in Commentaires%}
+      <p>{{c.auteur_commentaire.username}}</p>
+      <p>{{c.date_commentaire}}</p>
+    {%empty%}
+      <p>Aucun commentaire pour l'instant!</p>
+    {%endfor%}
   
-
-{%endblock%}
+    <a href="{% url 'detail' id=article.id %}">Retour à l'article</a>
+   {%endblock%}

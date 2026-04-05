@@ -5,5 +5,5 @@ urlpatterns = [
     path('', views.Accueil, name = 'accueil'),
     path('incrire/', views.Inscription.as_view(), name='inscrire'),
     path('liste/',views.ListView,name='liste_des_articles'),
-    path('liste/<int:id>/',views.DetailView,name='detail_traiteur'),
+    path('liste/<int:id>/',views.DetailView,name='detail'),
 ]

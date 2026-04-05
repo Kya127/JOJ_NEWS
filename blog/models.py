@@ -18,3 +18,10 @@ class Article(models.Model):
     def __str__(self):
         return self.titre
     
+class Commentaire(models.Model):
+    article_commentaire=models.ForeignKey(Article,on_delete=models.CASCADE,related_name='commentaires_article')
+    auteur_commentaire=models.ForeignKey(User,on_delete=models.CASCADE)
+    texte_commentaire=models.TextField()
+    date_commentaire=models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return f"{self.auteur_commentaire.username} - {self.article.titre}"

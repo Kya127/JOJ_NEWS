@@ -4,7 +4,7 @@
    {% if liste_article%}
     {%for a in liste_article%}
      <p>{{a.titre}}</p>
-     <a href="{%url 'detail_traiteur' a.id %}">Details sur l'article</a>
+     <a href="{%url 'detail' a.id %}">Details sur l'article</a>
      
     {%endfor%}
    {%endif%}
