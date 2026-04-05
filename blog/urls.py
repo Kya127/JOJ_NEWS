@@ -12,3 +12,5 @@ urlpatterns = [
     path("commentaire/modifier/<int:id>/", views.modifier_commentaire, name="modifier_commentaire"),
     path("commentaire/supprimer/<int:id>/", views.supprimer_commentaire, name="supprimer_commentaire"),
 ]
+
+

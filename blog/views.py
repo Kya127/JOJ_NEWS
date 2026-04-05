@@ -26,7 +26,6 @@ def ListView(request):
 
 @login_required
 def DetailView(request,id):
-    
      
     un_article=get_object_or_404(Article,id=id)
     commentaires = un_article.commentaires.all()
