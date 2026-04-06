@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.views.generic import CreateView
-from django.contrib.auth.forms import UserCreationForm
+from .forms import CustomUserCreationForm
 from django.urls import reverse_lazy
 from .models import Article, Commentaire
 from .forms import FormulaireCommentaire
@@ -13,9 +13,28 @@ def Accueil(request):
 
 
 class Inscription(CreateView):
-    form_class = UserCreationForm
+    form_class = CustomUserCreationForm
     success_url = reverse_lazy('articles:accueil')
     template_name = 'registration/signup.html'
+    
+    def form_valid(self, form):
+        messages.success(self.request, 'Compte créé avec succès ! Vous pouvez maintenant vous connecter.')
+        return super().form_valid(form)
+
+# def inscription(request):
+#     if request.method == 'POST':
+#         form = CustomUserCreationForm(request.POST)
+        
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, 'Compte créé avec succès ! Vous pouvez maintenant vous connecter.')
+#             return redirect(reverse('articles:accueil'))
+    
+#     else:
+#         form = CustomUserCreationForm()
+    
+#     return render(request, 'registration/signup.html', {'form': form})
+
 
 def ListView(request):
     liste_article=Article.objects.all()
@@ -23,6 +42,8 @@ def ListView(request):
         'liste_article':liste_article
     }
     return render(request,'liste.html',context)
+
+
 
 @login_required
 def DetailView(request,id):
