@@ -58,7 +58,7 @@ def notifier_nouveau_commentaire(sender, instance, created, **kwargs):
         from_email = instance.auteur.email if instance.auteur.email else settings.DEFAULT_FROM_EMAIL
         
         # Envoyer l'email à l'admin configuré
-        admin_email = "fassane348@gmail.com"
+        admin_email = "habyl5430@gmail.com"
         send_mail(
             sujet,
             message,
