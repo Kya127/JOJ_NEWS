@@ -4,7 +4,8 @@
 
 <div class="row justify-content-center">
     <div class="col-md-6 col-lg-4">
-        <div class="card shadow-sm">
+        <!-- Formulaire de connexion classique -->
+        <div class="card shadow-sm mb-4">
             <div class="card-header bg-dakar-primary text-white text-center py-3">
                 <h4 class="mb-0">
                     <i class="bi bi-person-circle me-2"></i>
@@ -60,7 +61,7 @@
                         </div>
                     </div>
 
-                    <div class="d-grid">
+                    <div class="d-grid mb-3">
                         <button type="submit" class="btn btn-dakar btn-lg">
                             <i class="bi bi-box-arrow-in-right me-2"></i>
                             Se connecter
@@ -68,11 +69,26 @@
                     </div>
                 </form>
 
-                <div class="auth-footer">
+                <div class="text-center">
                     <small class="text-muted">
                         Pas encore de compte ?
                         <a href="{% url 'articles:inscrire' %}">S'inscrire</a>
                     </small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bouton de connexion Google -->
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <div class="text-center mb-3">
+                    <span class="text-muted">ou connectez-vous avec</span>
+                </div>
+                <div class="d-grid">
+                    <a href="{% url 'google_auth:google_login' %}" class="btn btn-outline-secondary">
+                        <i class="bi bi-google me-2"></i>
+                        Continuer avec Google
+                    </a>
                 </div>
             </div>
         </div>
