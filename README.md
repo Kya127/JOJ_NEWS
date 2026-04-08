@@ -50,7 +50,7 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-## 📋 Configuration
+## Configuration
 
 ### Base de données MySQL
 Le projet utilise MySQL avec les variables d'environnement suivantes :
@@ -159,6 +159,6 @@ JOJ_NEWS/
 - **Module manquant** : `pip install -r requierement.txt`
 - **Permission refusée** : Vérifier les permissions de la base de données
 
-**Développé par [Kya127], [anf692] et [Aby01]**
+**Développé par [Kya127](https://github.com/Kya127), [anf692](https://github.com/anf692) et [Aby01](https://github.com/Aby01)**
 
 *Dernière mise à jour : Avril 2026*
