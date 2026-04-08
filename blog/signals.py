@@ -26,5 +26,5 @@ def notifier_nouveau_commentaire(sender, instance, created, **kwargs):
             message,
             from_email,  # Email de l'utilisateur qui commente
             [admin_email],
-            fail_silently=False,
+            fail_silently=False, # Ne pas afficher d'erreur si l'envoi échoue
         )
