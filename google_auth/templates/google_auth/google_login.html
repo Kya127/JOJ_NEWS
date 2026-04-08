@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Connexion Google - JOJ{% endblock %}
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="card auth-card">
+            <div class="card-header auth-header text-white">
+                <h4 class="mb-0">
+                    <i class="bi bi-google me-2"></i>
+                    Connexion avec Google
+                </h4>
+            </div>
+            <div class="card-body auth-body">
+                <p class="text-center mb-3">
+                    Connectez-vous avec votre compte Google pour accéder à JOJ NEWS
+                </p>
+                <div class="d-grid">
+                    <a href="{{ google_auth_url }}" class="btn btn-dakar">
+                        <i class="bi bi-google me-2"></i>
+                        Se connecter avec Google
+                    </a>
+                </div>
+                
+                <div class="auth-footer">
+                    <small class="text-muted">
+                        Préférer la connexion classique ?
+                        <a href="{% url 'login' %}">Se connecter ici</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
